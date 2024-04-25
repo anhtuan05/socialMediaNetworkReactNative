@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "FSReactNativeApp",
+    "slug": "FSReactNativeApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "FSReactNativeApp"
+}
