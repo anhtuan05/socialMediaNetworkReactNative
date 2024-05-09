@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useReducer } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -10,30 +8,26 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Post from './components/home/Post';
-import SignIn from './components/user/SignIn';
 import FSStyles from './styles/FSStyles';
-import Announcement from './components/home/Announcement';
 import UserInformation from './components/user/UserInformation';
+import Survey from './components/home/Survey';
+import FSUserReducer from './FSUserReducer';
+import FSContext from './FSContext';
+import SignIn from './components/user/SignIn';
+
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogin = (username, password) => {
-    if (username === 'A' && password === '1') {
-      setIsLoggedIn(true);
-    } else {
-      alert('Invalid username or password');
-    }
-  };
-
   const tabBarIconColor = FSStyles.primaryColor;
   const tabBarIconSize = 24;
 
+  const [user, dispatch] = useReducer(FSUserReducer, null);
+
   return (
-    <>
-      {isLoggedIn ? (
+    <FSContext.Provider value={[user, dispatch]}>
+      {user!==null ? (
         <NavigationContainer>
           <Tab.Navigator>
 
@@ -52,18 +46,6 @@ export default function App() {
               }}>
               {() => (
                 <ScrollView contentContainerStyle={{ padding: 10 }}>
-                  {/* {posts.map(postId => (
-                    <Post key={postId} />
-                  ))} */}
-                  <Post />
-                  <Post />
-                  <Post />
-                  <Post />
-                  <Post />
-                  <Post />
-                  <Post />
-                  <Post />
-                  <Post />
                   <Post />
                 </ScrollView>
               )}
@@ -84,29 +66,27 @@ export default function App() {
               }}>
               {() => (
                 <ScrollView contentContainerStyle={{ padding: 10 }}>
-                  <Post />
+                  <Survey />
                 </ScrollView>
               )}
             </Tab.Screen>
 
-            <Tab.Screen name="Announcement"
+            <Tab.Screen name="Survey"
               options={{
                 tabBarIcon: ({ focused }) => (
                   focused ? (
-                    <FontAwesome name="bell" size={tabBarIconSize} color={tabBarIconColor} /> // Icon khi được chọn
+                    <MaterialCommunityIcons name="text-box-search" size={tabBarIconSize} color={tabBarIconColor} /> // Icon khi được chọn
                   ) : (
-                    <FontAwesome name="bell-o" size={tabBarIconSize} color={tabBarIconColor} /> // Icon mặc định
+                    <MaterialCommunityIcons name="text-box-search-outline" size={tabBarIconSize} color={tabBarIconColor} /> // Icon mặc định
                   )
                 ),
                 tabBarLabelStyle: {
-                  display: 'none', // Loại bỏ từ "Announcement"
+                  display: 'none',
                 },
               }}>
               {() => (
                 <ScrollView contentContainerStyle={{ padding: 10 }}>
-                  <Announcement />
-                  <Announcement />
-                  <Announcement />
+                  <Survey />
                 </ScrollView>
               )}
             </Tab.Screen>
@@ -125,7 +105,7 @@ export default function App() {
                 },
               }}>
               {() => (
-                <ScrollView contentContainerStyle={{ padding: 10 }}>
+                <ScrollView>
                   <UserInformation />
                 </ScrollView>
               )}
@@ -137,10 +117,10 @@ export default function App() {
       ) : (
         // Nếu chưa đăng nhập, hiển thị component SignIn
         <View style={styles.container}>
-          <SignIn onLogin={handleLogin} />
+          <SignIn />
         </View>
       )}
-    </>
+    </FSContext.Provider>
   );
 }
 

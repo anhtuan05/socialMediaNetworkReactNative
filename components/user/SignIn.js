@@ -1,20 +1,65 @@
-import React from "react"
+import React, { useContext } from "react"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, ImageBackground, Image, ScrollView } from "react-native"
+import { View, Text, TouchableOpacity, TextInput, ImageBackground, Image, ScrollView, ActivityIndicator } from "react-native"
 import UserStyles from './UserStyles'
 import FSStyles from "../../styles/FSStyles"
 import SignUp from "./SignUp";
+import FSContext from "../../FSContext";
+import API, { authApi, endpoints } from "../../API";
+import FormData from 'form-data';
 
 const SignIn = ({ onLogin }) => {
 
-    const [mssv, setMssv] = useState('');
-    const [password, setPassword] = useState('');
+    const [mssv, setMssv] = useState();
+    const [password, setPassword] = useState();
     const [isSignUp, setIsSignUp] = useState(false);
+    const [loading, setLoading] = useState();
+    const [user, dispatch] = useContext(FSContext);
 
-    const handleSignInPress = () => {
-        onLogin(mssv, password);
-    };
+    const login = async () => {
+        setLoading(true);
+        try {
 
+            const formData = new FormData()
+            formData.append('client_id', 'VPn47hJtuScfdJQeE7IUDeUYwGm7OXSSjSAscqEz');
+            formData.append('client_secret', 'AWKjkCZA9FOZSMory3AwgC6VBjeeEWg59kswcGTbrr3ih6KCeoWAT96YH43p7mzMhlDEnpHqJyph5vnt1KrZ0r192Q6LCCIEVhIWikkPCkMJQ6Tx3XYuFNijn7Vh8Ldp');
+            formData.append('username', mssv);
+            formData.append('password', password);
+            formData.append('grant_type', 'password');
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            };
+
+            let res = await API.post(endpoints['login'], formData, config);
+
+            await AsyncStorage.setItem('token-access', res.data.access_token)
+
+            let user = await authApi(res.data.access_token).get(endpoints['current_user']);
+
+            console.info(user.data)
+
+            dispatch({
+                'type': 'login',
+                'payload': {
+                    'first_name': user.data.first_name,
+                    'last_name': user.data.last_name,
+                    'avatar_url': user.data.avatar_url,
+                    'cover_photo_url': user.data.cover_photo_url,
+                    'date_of_birth': user.data.date_of_birth,
+                    'number_phone': user.data.number_phone,
+                    'email': user.data.email
+                }
+            })
+
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    }
     const handleSignUpPress = () => {
         setIsSignUp(true);
     };
@@ -49,10 +94,11 @@ const SignIn = ({ onLogin }) => {
                                 value={password}
                                 onChangeText={text => setPassword(text)}>
                             </TextInput>
-
-                            <TouchableOpacity onPress={handleSignInPress} style={UserStyles.button}>
-                                <Text style={UserStyles.stylesText}>Sign In</Text>
-                            </TouchableOpacity>
+                            {loading === true ? <ActivityIndicator /> : <>
+                                <TouchableOpacity onPress={login} style={UserStyles.button}>
+                                    <Text style={UserStyles.stylesText}>Sign In</Text>
+                                </TouchableOpacity>
+                            </>}
                         </View>
 
                         <View style={{ width: '80%' }}>

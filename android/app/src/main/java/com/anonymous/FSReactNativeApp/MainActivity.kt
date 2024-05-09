@@ -1,4 +1,4 @@
-package com.fsreactnativeapp
+package com.anonymous.FSReactNativeApp
 
 import android.os.Build
 import android.os.Bundle
