@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, TouchableOpacity, TextInput, Image } from "react-native"
+import { View, Text, TouchableOpacity, Image } from "react-native"
 import HomeStyles from "./HomeStyles";
 
 
-const Announcement = () => {
+const Survey = () => {
     return (
         <>
             <View style={HomeStyles.containerPost}>
@@ -19,7 +19,7 @@ const Announcement = () => {
                     <Text style={HomeStyles.flName}>Nam</Text>
 
                     <Text style={HomeStyles.pContent}>
-                        Đã like bài viết số một của bạn 2024-05-02
+                        Survey
                     </Text>
 
                 </View>
@@ -29,4 +29,4 @@ const Announcement = () => {
     )
 }
 
-export default Announcement
+export default Survey

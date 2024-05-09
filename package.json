@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.1",
+    "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
+    "axios": "^1.6.8",
     "expo": "~50.0.14",
-    "expo-status-bar": "~1.11.1",
+    "expo-dev-client": "^4.0.12",
+    "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.73.6"
+    "react-native": "0.73.6",
+    "uri-scheme": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

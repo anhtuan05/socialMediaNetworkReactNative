@@ -43,6 +43,37 @@ const HomeStyles = StyleSheet.create({
     likeContainer: {
         display: "flex",
         flexDirection: "row",
+    },
+    containerTitle: {
+        backgroundColor: FSStyles.colorWhite,
+        padding: 20,
+        borderRadius: 10,
+        elevation: 50,
+        marginTop: 35
+    },
+    postTitle: {
+        fontSize: 22,
+        fontStyle: 'normal',
+        fontWeight: 'bold'
+    },
+    backText: {
+        marginBottom: 10
+    },
+    scrollView: {
+        paddingTop: 10,
+        borderRadius: 10
+    },
+    inputCmt: {
+        borderWidth: 1,
+        borderColor: FSStyles.primaryColor,
+        backgroundColor: FSStyles.colorWhite,
+        padding: 10,
+        paddingLeft: 20,
+        paddingRight: 60,
+        width: '100%',
+        marginBottom: 25,
+        borderRadius: 4,
+        color: FSStyles.colorBlack,
     }
 })
 

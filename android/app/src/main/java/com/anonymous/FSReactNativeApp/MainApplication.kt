@@ -1,4 +1,4 @@
-package com.fsreactnativeapp
+package com.anonymous.FSReactNativeApp
 
 import android.app.Application
 import android.content.res.Configuration
