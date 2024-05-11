@@ -48,6 +48,13 @@ const UserStyles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 50
     },
+    containerLogo2: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 40
+    },
     imageLogo: {
         width: 90,
         height: 113,
