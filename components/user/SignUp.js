@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, ImageBackground, Image } from 'react-native';
 import UserStyles from './UserStyles'
 import FSStyles from "../../styles/FSStyles"
@@ -20,6 +21,11 @@ const SignUp = ({ onBackToSignIn }) => {
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <ImageBackground source={require('../images/background_login.jpg')}
                     style={[UserStyles.backgroundImage]}>
+                    <View style={{ position: 'absolute', top: 60, left: 20 }}>
+                        <TouchableOpacity onPress={handleBackToSignInPress}>
+                            <Ionicons name="arrow-back" size={24} color={FSStyles.colorWhite} />
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={UserStyles.containerLogo}>
                         <Image source={require('../images/logofs.png')} style={UserStyles.imageLogo}></Image>
@@ -48,9 +54,6 @@ const SignUp = ({ onBackToSignIn }) => {
                             <Text style={UserStyles.stylesText}>Sign Up</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={UserStyles.button} onPress={handleBackToSignInPress}>
-                            <Text style={UserStyles.stylesText}>Back to Sign In</Text>
-                        </TouchableOpacity>
                     </View>
                 </ImageBackground>
             </ScrollView>

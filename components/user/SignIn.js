@@ -39,8 +39,6 @@ const SignIn = ({ onLogin }) => {
 
             let user = await authApi(res.data.access_token).get(endpoints['current_user']);
 
-            console.info(user.data)
-
             dispatch({
                 'type': 'login',
                 'payload': {
@@ -55,7 +53,7 @@ const SignIn = ({ onLogin }) => {
             })
 
         } catch (error) {
-            console.error(error);
+            alert(error);
         } finally {
             setLoading(false);
         }

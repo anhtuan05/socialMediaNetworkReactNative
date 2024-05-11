@@ -1,52 +1,44 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native"
-import { StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import HomeStyles from "../home/HomeStyles"
 import UserStyles from "./UserStyles";
 import FSContext from "../../FSContext";
 import Logout from "./Logout";
+import FSStyles from "../../styles/FSStyles";
+import Post from "../home/Post";
 
 
 const UserInformation = () => {
     const [user, dispatch] = useContext(FSContext);
+    const [menuVisible, setMenuVisible] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuVisible(!menuVisible);
+    };
     return (
         <>
-            <Image source={{ uri: user.cover_photo_url }} style={styles.coverPhoto} />
-            <View style={styles.userInfoContainer}>
-                <Image source={{ uri: user.avatar_url }} style={styles.avatar} />
-                <Text style={styles.username}>{user.first_name} {user.last_name}</Text>
+            <Image source={{ uri: user.cover_photo_url }} style={UserStyles.coverPhoto} />
+            <View style={UserStyles.userInfoContainer}>
+                <Image source={{ uri: user.avatar_url }} style={UserStyles.avatar} />
+                <Text style={UserStyles.username}>{user.first_name} {user.last_name}</Text>
             </View>
-            <View>
-                <Logout/>
+            <View style={{ padding: 10 }}>
+                <Post />
             </View>
+            <TouchableOpacity onPress={toggleMenu} style={{ position: 'absolute', top: 10, right: 10, zIndex: 999 }}>
+                <MaterialCommunityIcons name="account-details" size={30} color={FSStyles.primaryColor} />
+            </TouchableOpacity>
+            {menuVisible && (
+                <View style={[UserStyles.toggleMenuContainer, { position: 'absolute', top: 65, right: 10, zIndex: 999 }]}>
+                    <TouchableOpacity>
+                        {/* update_photo and logout in <Logout/>*/}
+                        <Logout />
+                    </TouchableOpacity>
+                </View>
+            )}
         </>
     );
 }
-const styles = StyleSheet.create({
-    coverPhoto: {
-        width: "100%",
-        height: 200,
-        marginBottom: 20,
-    },
-    userInfoContainer: {
-        display: "flex",
-        flexDirection: "column",
-    },
-    avatar: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        marginRight: 20,
-        position: "relative",
-        left: 30,
-        top: -70,
-    },
-    username: {
-        fontSize: 24,
-        fontWeight: "bold",
-        position: "relative",
-        left: 30,
-        top: -50,
-    },
-});
+
 export default UserInformation
