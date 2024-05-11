@@ -9,7 +9,7 @@ import FSContext from "../../FSContext";
 import API, { authApi, endpoints } from "../../API";
 import FormData from 'form-data';
 
-const SignIn = ({ onLogin }) => {
+const SignIn = () => {
 
     const [mssv, setMssv] = useState();
     const [password, setPassword] = useState();
@@ -72,7 +72,7 @@ const SignIn = ({ onLogin }) => {
         ) :
             (<View style={UserStyles.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <ImageBackground source={require('../images/background_login.jpg')}
+                    <ImageBackground source={require('../images/background_login2.jpg')}
                         style={[UserStyles.backgroundImage]}>
 
                         <View style={UserStyles.containerLogo}>
