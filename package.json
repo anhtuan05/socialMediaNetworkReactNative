@@ -19,6 +19,7 @@
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.73.6",
+    "react-native-render-html": "^6.3.4",
     "uri-scheme": "^1.2.1"
   },
   "devDependencies": {

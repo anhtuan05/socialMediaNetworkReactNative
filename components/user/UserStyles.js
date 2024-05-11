@@ -51,6 +51,34 @@ const UserStyles = StyleSheet.create({
     imageLogo: {
         width: 90,
         height: 113,
+    },
+    coverPhoto: {
+        width: "100%",
+        height: 200,
+        marginBottom: 20,
+    },
+    userInfoContainer: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    avatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        position: "relative",
+        left: 30,
+        top: -70,
+    },
+    username: {
+        fontSize: 24,
+        fontWeight: "bold",
+        position: "relative",
+        left: 30,
+        top: -50,
+    },
+    toggleMenuContainer:{
+        backgroundColor: FSStyles.colorWhite,
+        marginTop: -20
     }
 });
 

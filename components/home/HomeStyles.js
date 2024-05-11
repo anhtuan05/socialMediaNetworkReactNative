@@ -35,7 +35,8 @@ const HomeStyles = StyleSheet.create({
         fontWeight: "bold"
     },
     pContent: {
-        marginBottom: 10,
+        flex: 1,
+        marginBottom: 5,
         width: "100%",
         height: "auto",
         overflow: "scroll"
@@ -43,18 +44,20 @@ const HomeStyles = StyleSheet.create({
     likeContainer: {
         display: "flex",
         flexDirection: "row",
+        marginTop: 5
     },
     containerTitle: {
         backgroundColor: FSStyles.colorWhite,
         padding: 20,
         borderRadius: 10,
         elevation: 50,
-        marginTop: 35
+        marginTop: 35,
+        flexDirection: "column",
     },
     postTitle: {
-        fontSize: 22,
+        fontSize: 18,
         fontStyle: 'normal',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     backText: {
         marginBottom: 10
