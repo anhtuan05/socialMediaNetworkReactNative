@@ -62,7 +62,9 @@ const Comment = ({ postId, goBack, postTitle, postContent }) => {
 
                         <View style={HomeStyles.avatar}>
                             <TouchableOpacity>
-                                <Image source={{ uri: comment.user.avatar_url }} style={{ width: 40, height: 40, borderRadius: 50 }} />
+                                <Image 
+                                source={{ uri: comment.user.avatar_url }} 
+                                style={{ width: 40, height: 40, borderRadius: 50 }} />
                             </TouchableOpacity>
                         </View>
 
