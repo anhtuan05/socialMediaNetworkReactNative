@@ -17,6 +17,7 @@
     "expo": "~50.0.14",
     "expo-dev-client": "^4.0.12",
     "expo-status-bar": "~1.12.1",
+    "moment": "^2.30.1",
     "react": "18.2.0",
     "react-native": "0.73.6",
     "react-native-render-html": "^6.3.4",
