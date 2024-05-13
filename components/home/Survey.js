@@ -1,42 +1,75 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native"
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, Image, useWindowDimensions } from "react-native"
 import HomeStyles from "./HomeStyles";
 import SurveyDetail from "./SurveyDetail";
 import { Button } from "../buttonSurvey";
+import API, { endpoints } from "../../API";
+import RenderHTML from "react-native-render-html";
 
-const Survey = () => {
+const Survey = ({}) => {
     const [showSurveyDetail, setShowSurveyDetail] = useState(false);
+    const [selectedSurveyId, setSelectedSurveyId] = useState(null);
+    const [surveys, setSurveys] = useState(null);
+    const { width } = useWindowDimensions();
+    
+    const handleGoBack = () => {
+        setShowSurveyDetail(false);
+    }
 
-    const toggleSurveyDetail = () => {
-        setShowSurveyDetail(!showSurveyDetail); // Chuyển đổi giá trị của showSurveyDetail
+    const handleSurveyDetail = (id) => {
+        setSelectedSurveyId(id);
+        setShowSurveyDetail(true);
     };
+
+    useEffect(() => {
+        const loadSurveys = async () => {
+            try {
+                const res = await API.get(endpoints['surveys']);
+                setSurveys(res.data);
+            } catch (ex) {
+                console.error(ex)
+            }
+        };
+
+        loadSurveys();
+    }, []); // Empty dependency array to ensure useEffect only runs once
+
+    // const toggleSurveyDetail = () => {
+    //     setShowSurveyDetail(!showSurveyDetail); // Toggle the value of showSurveyDetail
+    // };
 
     return (
         <>
-            {!showSurveyDetail && (
-                <View style={HomeStyles.containerPost}>
+            {!showSurveyDetail && surveys && surveys.map(survey => (
+                <View key={survey.id} style={HomeStyles.containerPost}>
                     <View style={HomeStyles.avatar}>
                         <TouchableOpacity>
-                            <Image source={require('../images/avatar_default.png')}
+                            <Image source={{ uri: survey.created_by.avatar_url }}
                                 style={{ width: 40, height: 40, borderRadius: 50 }} />
                         </TouchableOpacity>
                     </View>
 
                     <View style={HomeStyles.contentPost}>
 
-                        <Text style={HomeStyles.flName}>Nam</Text>
+                        <Text style={HomeStyles.flName}>{survey.created_by.first_name} {survey.created_by.last_name}</Text>
 
-                        <Text style={HomeStyles.contentPost}>
-                            Tỉ lệ có việc làm sau khi ra trường
+                        <Text style={HomeStyles.postTitle}>
+                            Khảo sát: {survey.title}
                         </Text>
+                        <Text style={{fontStyle: 'italic', fontSize: 15, marginTop: 5}}>
+                            Mô tả:
+                        </Text>
+                        <RenderHTML style={HomeStyles.surveyDescribe} 
+                            contentWidth={width}
+                            source={{html: survey.description}}/>
 
-                        <Button onPress={toggleSurveyDetail}>
+                        <Button onPress={() => handleSurveyDetail(survey.id)}>
                             Tham gia khảo sát
                         </Button>
                     </View>
                 </View>
-            )}
-            {showSurveyDetail && <SurveyDetail />}
+            ))}
+            {showSurveyDetail && <SurveyDetail surveyId= {selectedSurveyId} goBack={handleGoBack} />}
         </>
     )
 }
