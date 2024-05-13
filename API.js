@@ -9,6 +9,9 @@ export const endpoints = {
     'profile': (user_Id) => `/users/${user_Id}/profile/`,
     'userPosts': (user_Id) => `/users/${user_Id}/posts/`,
     'postComments': (post_Id) => `/posts/${post_Id}/comments/`,
+    'POSTCmt': (post_Id) => `/posts/${post_Id}/add_comment/`,
+    'DELETECmt': (cmt_Id) => `/comments/${cmt_Id}/`,
+    'PATCHCmt': (cmt_Id) => `/comments/${cmt_Id}/`,
 }
 
 export const authApi = (accessToken) => axios.create({

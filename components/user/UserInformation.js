@@ -24,7 +24,7 @@ const UserInformation = () => {
                 <Text style={UserStyles.username}>{user.first_name} {user.last_name}</Text>
             </View>
             <View style={{ padding: 10 }}>
-                <Post />
+                <Post userIdPosts={user.id} />
             </View>
             <TouchableOpacity onPress={toggleMenu} style={{ position: 'absolute', top: 10, right: 10, zIndex: 999 }}>
                 <MaterialCommunityIcons name="account-details" size={30} color={FSStyles.primaryColor} />
