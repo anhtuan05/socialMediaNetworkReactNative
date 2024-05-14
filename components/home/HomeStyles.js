@@ -104,7 +104,7 @@ const HomeStyles = StyleSheet.create({
         color: "#f9fafb",
         fontWeight: "bold"
     },
-})
+});
 
 const radio = StyleSheet.create({
     container: {
@@ -132,6 +132,33 @@ const radio = StyleSheet.create({
     activeText: {
         color: "#374151",
     },
-})
+    dialogContainer: {
+        backgroundColor: FSStyles.colorWhite,
+        padding: 20,
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 50,
+    },
+    inputDialog: {
+        borderBottomWidth: 1,
+        borderBottomColor: "gray",
+        marginBottom: 10,
+        fontSize: 16,
+    },
+    buttonDialog: {
+        backgroundColor: FSStyles.primaryColor,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+    },
+    buttonTextDialog: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+});
 
 export default HomeStyles;

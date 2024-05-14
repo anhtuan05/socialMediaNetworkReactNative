@@ -42,6 +42,7 @@ const SignIn = () => {
             dispatch({
                 'type': 'login',
                 'payload': {
+                    'id': user.data.id,
                     'first_name': user.data.first_name,
                     'last_name': user.data.last_name,
                     'avatar_url': user.data.avatar_url,

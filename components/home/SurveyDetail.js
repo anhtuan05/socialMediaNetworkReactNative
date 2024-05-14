@@ -37,7 +37,7 @@ const SurveyDetail = ({ surveyId, goBack }) => {
             <View style={[styles.container, { marginBottom: 20 }, { marginTop: 40 }]}>
                 <Text style={styles.mainHeader}>Câu hỏi khảo sát</Text>
 
-                {loading ? ( // Kiểm tra trạng thái tải để hiển thị ActivityIndicator
+                {loading ? (
                     <ActivityIndicator size="large" color={FSStyles.primaryColor} />
                 ) : (
                     questions.map(question => (
@@ -45,7 +45,13 @@ const SurveyDetail = ({ surveyId, goBack }) => {
                             <Text style={styles.header}>{question.content}</Text>
                         </View>
                     ))
-                )}
+                )
+                }
+                <View>
+                    <TouchableOpacity>
+                        
+                    </TouchableOpacity>
+                </View>
             </View>
 
             <View>
