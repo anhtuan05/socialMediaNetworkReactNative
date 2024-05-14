@@ -110,7 +110,6 @@ const Post = ({ userIdPosts }) => {
 
                                 <TouchableOpacity onPress={() => handleCommentClick(post.id, post.title, post.content)} style={HomeStyles.likeContainer}>
                                     <AntDesign name="message1" size={18} color={FSStyles.secondaryColor} />
-                                    <Text style={{ color: FSStyles.secondaryColor, marginLeft: 5 }}>1</Text>
                                 </TouchableOpacity>
 
                             </View>

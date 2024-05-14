@@ -13,6 +13,9 @@ const UserStyles = StyleSheet.create({
         borderRadius: 10,
         color: FSStyles.colorWhite,
     },
+    input2: {
+        width: "48%"
+    },
     button: {
         backgroundColor: FSStyles.primaryColor,
         padding: 15,
@@ -41,6 +44,12 @@ const UserStyles = StyleSheet.create({
     },
     containerContent: {
         width: '85%',
+    },
+    containerChildContent: {
+        width: '100%',
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
     },
     containerLogo: {
         display: 'flex',
@@ -90,3 +99,4 @@ const UserStyles = StyleSheet.create({
 });
 
 export default UserStyles;
+
