@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import FSStyles from '../../styles/FSStyles';
+import Survey from "./Survey";
 
 
 const HomeStyles = StyleSheet.create({
@@ -55,9 +56,19 @@ const HomeStyles = StyleSheet.create({
         flexDirection: "column",
     },
     postTitle: {
+        marginTop: 3,
         fontSize: 18,
         fontStyle: 'normal',
         fontWeight: 'bold',
+    },
+    surveyTitle: {
+        fontSize: 20,
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+    },
+    surveyDescribe: {
+        fontSize: 15,
+        fontStyle: "italic",
     },
     backText: {
         marginBottom: 10
@@ -77,6 +88,49 @@ const HomeStyles = StyleSheet.create({
         marginBottom: 25,
         borderRadius: 4,
         color: FSStyles.colorBlack,
+    },
+    button: {
+        height: 40,
+        width: "70%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 40,
+        backgroundColor: "#06b6d4" + "cc",
+        margin: 10
+    },
+    textButton: {
+        fontSize: 17,
+        color: "#f9fafb",
+        fontWeight: "bold"
+    },
+});
+
+const radio = StyleSheet.create({
+    container: {
+        width: "100%",
+    },
+    radio: {
+        height: 35,
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        marginBottom: "10",
+        backgroundColor: "#f3f4f6",
+        paddingHorizontal: 15,
+        borderRadius: 15,
+        margin: 5,
+    },
+    activeRadio: {
+        backgroundColor: "#06b6b4" + "11",
+    },
+    text: {
+        fontSize: 16,
+        marginLeft: 15,
+        color: "#6b7280",
+    },
+    activeText: {
+        color: "#374151",
     },
     dialogContainer: {
         backgroundColor: FSStyles.colorWhite,
@@ -105,6 +159,6 @@ const HomeStyles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
     },
-})
+});
 
 export default HomeStyles;

@@ -73,13 +73,17 @@ const Post = ({ userIdPosts }) => {
                     <View style={HomeStyles.containerPost} key={post.id}>
                         <View style={HomeStyles.avatar}>
                             <TouchableOpacity onPress={() => handleUserPageClick(post.created_by.id)}>
-                                <Image source={{ uri: post.created_by.avatar_url }} style={{ width: 40, height: 40, borderRadius: 50 }} />
+                                <Image source={{ 
+                                    uri: post.created_by.avatar_url }} 
+                                    style={{ width: 40, height: 40, borderRadius: 50 }} />
                             </TouchableOpacity>
                         </View>
 
                         <View style={HomeStyles.contentPost}>
 
-                            <Text style={HomeStyles.flName}>{post.created_by.first_name} {post.created_by.last_name}</Text>
+                            <Text style={HomeStyles.flName}>
+                                {post.created_by.first_name} {post.created_by.last_name}
+                            </Text>
 
                             <Text style={HomeStyles.pContent}>
                                 {post.title}
