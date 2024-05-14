@@ -81,11 +81,11 @@ const Comment = ({ postId, goBack, postTitle, postContent }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={[HomeStyles.containerPost, HomeStyles.containerTitle]}>
-                    <Text style={HomeStyles.postTitle}>
+                    <Text style={[HomeStyles.postTitle, {marginBottom: 10}]}>
                         {postTitle}
                     </Text>
 
-                    <RenderHTML style={HomeStyles.pContent} contentWidth={width} source={{ html: postContent }} />
+                    <RenderHTML style={[HomeStyles.pContent]} contentWidth={width} source={{ html: postContent }} />
 
                 </View>
             </View>
@@ -121,9 +121,9 @@ const Comment = ({ postId, goBack, postTitle, postContent }) => {
 
                         <View style={HomeStyles.avatar}>
                             <TouchableOpacity>
-                                <Image 
-                                source={{ uri: comment.user.avatar_url }} 
-                                style={{ width: 40, height: 40, borderRadius: 50 }} />
+                                <Image
+                                    source={{ uri: comment.user.avatar_url }}
+                                    style={{ width: 40, height: 40, borderRadius: 50 }} />
                             </TouchableOpacity>
                         </View>
 
