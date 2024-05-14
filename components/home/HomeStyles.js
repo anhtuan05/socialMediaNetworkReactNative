@@ -133,32 +133,4 @@ const HomeStyles = StyleSheet.create({
     }
 });
 
-const radio = StyleSheet.create({
-    container: {
-        width: "100%",
-    },
-    radio: {
-        height: 35,
-        width: "100%",
-        flexDirection: "row",
-        alignItems: "center",
-        marginBottom: "10",
-        backgroundColor: "#f3f4f6",
-        paddingHorizontal: 15,
-        borderRadius: 15,
-        margin: 5,
-    },
-    activeRadio: {
-        backgroundColor: "#06b6b4" + "11",
-    },
-    text: {
-        fontSize: 16,
-        marginLeft: 15,
-        color: "#6b7280",
-    },
-    activeText: {
-        color: "#374151",
-    }
-});
-
 export default HomeStyles;

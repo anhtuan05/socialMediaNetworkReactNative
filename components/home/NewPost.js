@@ -4,7 +4,7 @@ import API, { authApi, endpoints } from "../../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FSStyles from "../../styles/FSStyles";
 
-const NewPost = ({ navigation }) => {
+const NewPost = () => {
     const [title, setTitle] = useState();
     const [content, setContent] = useState();
 

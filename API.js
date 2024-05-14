@@ -11,10 +11,11 @@ export const endpoints = {
     'postComments': (post_Id) => `/posts/${post_Id}/comments/`,
     'surveys': '/surveys',
     'surveyQuestions': (survey_Id) => `/surveys/${survey_Id}/get_question/`,
-    'questionAnswers': (question_Id) => `/questions/${question_Id}/get_answer/`,
     'POSTCmt': (post_Id) => `/posts/${post_Id}/add_comment/`,
     'DELETECmt': (cmt_Id) => `/comments/${cmt_Id}/`,
     'PATCHCmt': (cmt_Id) => `/comments/${cmt_Id}/`,
+    'questionAnswers': (question_Id) => `/questions/${question_Id}/get_answer/`,
+    'answersQuantity': (answerID) => `answers/${answerID}/plus_quantity/`,
 }
 
 export const authApi = (accessToken) => axios.create({

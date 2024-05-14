@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Image, useWindowDimensions } from "react-native"
+import { View, Text, TouchableOpacity, Image, useWindowDimensions, StyleSheet } from "react-native"
 import HomeStyles from "./HomeStyles";
 import SurveyDetail from "./SurveyDetail";
-import { Button } from "../buttonSurvey";
 import API, { endpoints } from "../../API";
 import RenderHTML from "react-native-render-html";
 
-const Survey = ({}) => {
+const Survey = ({ }) => {
     const [showSurveyDetail, setShowSurveyDetail] = useState(false);
     const [selectedSurveyId, setSelectedSurveyId] = useState(null);
     const [surveys, setSurveys] = useState(null);
     const { width } = useWindowDimensions();
-    
+
     const handleGoBack = () => {
         setShowSurveyDetail(false);
     }
@@ -56,22 +55,42 @@ const Survey = ({}) => {
                         <Text style={HomeStyles.postTitle}>
                             Khảo sát: {survey.title}
                         </Text>
-                        <Text style={{fontStyle: 'italic', fontSize: 15, marginTop: 5}}>
+                        <Text style={{ fontStyle: 'italic', fontSize: 15, marginTop: 5 }}>
                             Mô tả:
                         </Text>
-                        <RenderHTML style={HomeStyles.surveyDescribe} 
+                        <RenderHTML style={HomeStyles.surveyDescribe}
                             contentWidth={width}
-                            source={{html: survey.description}}/>
+                            source={{ html: survey.description }} />
 
-                        <Button onPress={() => handleSurveyDetail(survey.id)}>
-                            Tham gia khảo sát
-                        </Button>
+                        <TouchableOpacity onPress={() => handleSurveyDetail(survey.id)} style={styles.containerButton}>
+                            <Text style={styles.textButton}>Tham gia khảo sát</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             ))}
-            {showSurveyDetail && <SurveyDetail surveyId= {selectedSurveyId} goBack={handleGoBack} />}
+            {showSurveyDetail && <SurveyDetail surveyId={selectedSurveyId} goBack={handleGoBack} />}
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    textButton: {
+        fontSize: 17,
+        color: "#f9fafb",
+        fontWeight: "bold",
+    },
+    containerButton: {
+        height: 50,
+        width: "80%",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 40,
+        backgroundColor: "#06b6d4" + "cc",
+        padding: 10,
+        marginBottom: 15,
+        marginTop: 15,
+    },
+})
 
 export default Survey;
