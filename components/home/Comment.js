@@ -62,6 +62,8 @@ const Comment = ({ postId, goBack, postTitle, postContent }) => {
         fetchPostComments();
         setContentUpdate("");
         setIsEditing(false);
+
+        alert("Update Comment Success");
     };
 
     const openEditting = (id, cmt) => {

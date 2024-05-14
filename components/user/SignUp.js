@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, ImageBackground, Image, Alert, Platform } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, ImageBackground, Image, Alert, Platform, ActivityIndicator } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import UserStyles from './UserStyles'
 import FSStyles from "../../styles/FSStyles"
+import API, { endpoints } from '../../API';
+import FormData from 'form-data';
+import mime from 'mime'
+
 
 const SignUp = ({ onBackToSignIn }) => {
     const [user, setUser] = useState({
@@ -19,29 +23,65 @@ const SignUp = ({ onBackToSignIn }) => {
         'cover_photo': ""
     });
 
+    const [loading, setLoading] = useState(false);
+
     const [confirmPassword, setConfirmPassword] = useState();//xác nhận password
     const [showDatePicker, setShowDatePicker] = useState(false);//show pop up chọn day of birth
 
-    const handleSignUpPress = () => {
+    const handleSignUpPress = async () => {
         if (user.password !== confirmPassword) {
             Alert.alert('Error', 'Passwords do not match');
             return;
         }
-        // API Register
-        console.info(user);
+
+        setLoading(true);
+        let form = new FormData();
+        for (let key in user) {
+            if (user[key] && (key === 'avatar' || key === 'cover_photo')) {
+                form.append(key, {
+                    uri: user[key].uri,
+                    name: user[key].uri.split('/').pop(),
+                    type: user[key].type
+                });
+            } else {
+                form.append(key, user[key]);
+            }
+        }
+
+        try {
+            let res = await API.post(endpoints['register'], form, {
+                headers: {
+                    "Content-Type": 'multipart/form-data'
+                }
+            });
+            Alert.alert('Success', 'User registered successfully');
+        } catch (error) {
+            Alert.alert('Error', `Failed to register user: ${error.message}`);
+        } finally {
+            setLoading(false);
+            onBackToSignIn();
+        }
     };
 
     //vào thư viện của thiết bị chọn ảnh
     const pickImage = async (field) => {
-        let { status } =
-            await ImagePicker.requestMediaLibraryPermissionsAsync();
+        let { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
-            alert("Permissions denied!");
-        } else {
-            const result = await ImagePicker.launchImageLibraryAsync();
-            if (!result.canceled) {
-                change(field, result.assets[0]);
-            }
+            Alert.alert("Permissions denied!");
+            return;
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            const asset = result.assets[0];
+            const mimeType = mime.getType(asset.uri);
+            change(field, { ...asset, type: mimeType });
         }
     }
 
@@ -54,9 +94,10 @@ const SignUp = ({ onBackToSignIn }) => {
 
     //cập nhật day of birth lên state user
     const handleDateChange = (event, selectedDate) => {
-        const currentDate = selectedDate || user.date_of_birth;
-        setShowDatePicker(Platform.OS === 'ios');
-        change('date_of_birth', currentDate.toISOString().split('T')[0]);
+        if (selectedDate) {
+            setShowDatePicker(Platform.OS === 'ios');
+            change('date_of_birth', selectedDate.toISOString().split('T')[0]);
+        }
     };
 
     const handleBackToSignInPress = () => {
@@ -160,11 +201,12 @@ const SignUp = ({ onBackToSignIn }) => {
                                 <Text style={UserStyles.stylesText}> Up Load Cover Photo</Text>
                             </TouchableOpacity>
 
-                            {user.cover_photo ? <Image source={{ uri: user.cover_photo.uri }} style={{ width: 150, height: 100, marginTop: 15 }} /> : ""}
-
-                            <TouchableOpacity style={[UserStyles.button, {marginBottom: 50}]} onPress={handleSignUpPress}>
-                                <Text style={UserStyles.stylesText}>Sign Up</Text>
-                            </TouchableOpacity>
+                            {user.cover_photo ? <Image source={{ uri: user.cover_photo.uri }} style={{ width: 160, height: 90, marginTop: 15 }} /> : ""}
+                            {loading === true ? <ActivityIndicator /> : (
+                                <TouchableOpacity style={[UserStyles.button, { marginBottom: 50 }]} onPress={handleSignUpPress}>
+                                    <Text style={UserStyles.stylesText}>Sign Up</Text>
+                                </TouchableOpacity>
+                            )}
                         </View>
                     </ImageBackground>
                 </View >

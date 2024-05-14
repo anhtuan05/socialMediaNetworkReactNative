@@ -16,6 +16,7 @@ const UserInformation = () => {
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
     };
+
     return (
         <>
             <Image source={{ uri: user.cover_photo_url }} style={UserStyles.coverPhoto} />
@@ -24,7 +25,7 @@ const UserInformation = () => {
                 <Text style={UserStyles.username}>{user.first_name} {user.last_name}</Text>
             </View>
             <View style={{ padding: 10 }}>
-                <Post userIdPosts={user.id} />
+                {/* Update User */}
             </View>
             <TouchableOpacity onPress={toggleMenu} style={{ position: 'absolute', top: 10, right: 10, zIndex: 999 }}>
                 <MaterialCommunityIcons name="account-details" size={30} color={FSStyles.primaryColor} />
