@@ -14,6 +14,7 @@ import Survey from './components/home/Survey';
 import FSUserReducer from './FSUserReducer';
 import FSContext from './FSContext';
 import SignIn from './components/user/SignIn';
+import NewPost from './components/home/NewPost';
 
 
 const Tab = createBottomTabNavigator();
@@ -27,7 +28,7 @@ export default function App() {
 
   return (
     <FSContext.Provider value={[user, dispatch]}>
-      {user!==null ? (
+      {user!== null ? (
         <NavigationContainer>
           <Tab.Navigator>
 
@@ -66,7 +67,7 @@ export default function App() {
               }}>
               {() => (
                 <ScrollView contentContainerStyle={{ padding: 10 }}>
-                  <Survey />
+                  <NewPost />
                 </ScrollView>
               )}
             </Tab.Screen>
@@ -117,7 +118,7 @@ export default function App() {
       ) : (
         // Nếu chưa đăng nhập, hiển thị component SignIn
         <View style={styles.container}>
-          <SignIn />
+            <SignIn />
         </View>
       )}
     </FSContext.Provider>
@@ -126,7 +127,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
 });
 
