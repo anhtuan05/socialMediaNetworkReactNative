@@ -7,7 +7,8 @@ Cài ứng dụng:
             git clone https://github.com/anhtuan05/socialMediaNetworkReactNative.git
 
 - Mở file vừa clone về bằng visual studio code, vào phần terminal, nhập lệnh:
-           npm start
+     npm install để cài tất cả các phụ thuộc trong package.js
+     npm start
 
 Tại đây có 2 trường hợp: mở trên thiết bị thật và thiết bị ảo.
 1. Thiết bị ảo:
