@@ -216,7 +216,12 @@ const Post = ({ userIdPosts }) => {
     const handleGoBack = () => {
         setShowComment(false); // Hide the Comment and UserPage component
         setshowUserPage(false);
-        fetchPostData();
+        if (userIdPosts) {
+            fetchUserPosts();
+        }
+        else {
+            fetchPostData();
+        }
     };
 
     return (
